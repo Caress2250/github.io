@@ -41,3 +41,9 @@ window.onload = function() {
   // Commentoのスクリプトタグをコメント領域に追加します
   commentoDiv.appendChild(script);
 }
+
+
+//ボタンがクリックされたときに前のページに戻る機能
+document.getElementById('back-button').addEventListener('click', function() {
+  window.history.back();
+});
