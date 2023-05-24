@@ -7,6 +7,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -3426,7 +3427,7 @@ input, select, textarea {
 	}
 
 		#intro .logo:before {
-			background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100px' height='100px' viewBox='0 0 100 100' preserveAspectRatio='none' zoomAndPan='disable'%3E%3Cpolygon points='0,0 100,0 100,25 50,0 0,25' style='fill:%23f4f4f4' /%3E%3Cpolygon points='0,100 100,100 100,75 50,100 0,75' style='fill:%23f4f4f4' /%3E%3C/svg%3E");
+			/* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100px' height='100px' viewBox='0 0 100 100' preserveAspectRatio='none' zoomAndPan='disable'%3E%3Cpolygon points='0,0 100,0 100,25 50,0 0,25' style='fill:%23f4f4f4' /%3E%3Cpolygon points='0,100 100,100 100,75 50,100 0,75' style='fill:%23f4f4f4' /%3E%3C/svg%3E"); */
 			background-position: top left;
 			background-repeat: no-repeat;
 			background-size: 100% 100%;
@@ -3442,7 +3443,8 @@ input, select, textarea {
 		#intro .logo img {
 			display: block;
 			margin-left: -0.25em;
-			width: 4.5em;
+			width: 8em;
+			
 		}
 
 	#intro header h2 {
@@ -3614,3 +3616,31 @@ input, select, textarea {
 			}
 
 		}
+
+
+		
+
+
+
+
+
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* 必要に応じて変更 */
+}
+
+.button-container {
+  order: 1;  /* ボタンが先に表示されるようにする */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;  /* ボタンを右側に配置 */
+}
+
+.comment-container {
+  order: 2;  /* コメントが後に表示されるようにする */
+  width: 100%;
+}
+
+  
