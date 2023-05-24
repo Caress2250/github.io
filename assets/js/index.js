@@ -4,17 +4,6 @@ let page = Number(urlParams.get('page')) || 1; // URLのパラメータからpag
 
 let apiIndex = "https://2mmx7gzu7i.microcms.io/api/v1/blogs"; // APIのエンドポイント
 
-// 画像の遅延読み込みのためのIntersection Observerを作成します
-const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const lazyImage = entry.target;
-      lazyImage.src = lazyImage.dataset.src;
-      observer.unobserve(lazyImage);
-    }
-  });
-});
-
 // ブログデータを取得する関数
 const getBlogData = () => {
   let offset = (page - 1) * 5; // 5記事ずつ表示するため、offsetは (ページ数 - 1) * 5
@@ -38,12 +27,37 @@ const getBlogData = () => {
     }
 
     // ここで遅延読み込み対象の画像に対して、Intersection Observerを適用します
-    document.querySelectorAll('[data-src]').forEach(img => {
-      lazyLoadObserver.observe(img);
+    // 遅延読み込みを実行する関数
+    const lazyLoadImages = () => {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      // Intersection Observerを初期化
+      let observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove('lazy');
+            observer.unobserve(lazyImage);
+          }
+        });
+      }, options);
+    
+      // 遅延読み込みを行うために監視する画像要素を選択
+      document.querySelectorAll('.lazy').forEach(  lazyImage => {
+        observer.observe(lazyImage);
+      });
+    };
+    
+    // DOMContentLoadedイベントの後に実行
+    window.addEventListener('DOMContentLoaded', () => {
+      lazyLoadImages();
     });
-
-    // 次のページへのリンクと前のページへのリンクの更新は以前と同じです...
-  })
+  }) // getBlogDataの閉じカッコ追加
 }
 
 // 個々のブログデータを取得する関数
@@ -63,8 +77,9 @@ const fetchSingleBlogData = (latestId, index) => {
     document.getElementById(`content${index}`).innerHTML = json.content; // コンテンツを表示
     let eyecatchElement = document.getElementById(`eyecatch${index}`);
     eyecatchElement.dataset.src = json.eyecatch.url; // アイキャッチ画像のURLをdata-src属性に設定
+    eyecatchElement.classList.add('lazy'); // アイキャッチ画像に 'lazy' クラスを追加
   })
-}
+} // fetchSingleBlogDataの閉じカッコ追加
 
 // APIから指定されたページのブログ記事を取得する関数を呼び出す
 getBlogData(); // 上記で定義した関数を実行し、ブログデータを取得します
