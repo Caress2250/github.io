@@ -18,8 +18,7 @@ fetch(apiUrl, {
 .catch(err => {
     console.error('APIリクエストでエラーが発生しました：', err);
   });
-
-// コメント機能を実装する
+  // コメント機能を実装する
 window.onload = function() {
   // コメント領域を初期化します
   let commentoDiv = document.getElementById('commento');
@@ -33,22 +32,6 @@ window.onload = function() {
   // Commentoのスクリプトタグをコメント領域に追加します
   commentoDiv.appendChild(script);
 }
-
 document.getElementById('back-button').addEventListener('click', function() {
-  // sessionStorageから前のURLを取得
-  const previousUrl = sessionStorage.getItem('previousUrl');
-  // 前のURLに遷移
-  if(previousUrl) {
-    window.location.href = previousUrl;
-  } else {
-    // If there is no previousUrl saved, default back behavior
-    window.history.back();
-  }
-});
-
-// 詳細ページへのリンクがクリックされる前に、現在のURLを保存
-document.querySelectorAll('.button.large').forEach(function(item) {
-  item.addEventListener('click', function() {
-    sessionStorage.setItem('previousUrl', window.location.href);
-  });
+  window.history.back();
 });
