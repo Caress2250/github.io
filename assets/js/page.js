@@ -1,13 +1,9 @@
-// URLパラメータからIDを取得
 const urlParams = new URLSearchParams(window.location.search);
-let id = urlParams.get('id'); 
+let id = urlParams.get('id'); // URLパラメータからIDを取得
 
-// APIのエンドポイント
-let apiIndex = "https://2mmx7gzu7i.microcms.io/api/v1/blogs"; 
-// URLパラメータのIDを使ってAPIのURLを組み立てる
-let apiUrl = `${apiIndex}/${id}`; 
+let apiIndex = "https://2mmx7gzu7i.microcms.io/api/v1/blogs"; // APIのエンドポイント
+let apiUrl = `${apiIndex}/${id}`; // URLパラメータのIDを使ってAPIのURLを組み立てる
 
-// APIリクエストを送信
 fetch(apiUrl, {
   headers: {
     "X-API-KEY": "PEfp0AHyALckYsrJavaQSj0l1KOg6LhIUOww" // APIキー
@@ -23,9 +19,12 @@ fetch(apiUrl, {
 })
 .catch(err => {
     console.error('APIリクエストでエラーが発生しました：', err);
-});
+  });
 
-// コメント機能を実装する
+
+
+  
+  // コメント機能を実装する
 window.onload = function() {
   // コメント領域を初期化します
   let commentoDiv = document.getElementById('commento');
@@ -41,9 +40,9 @@ window.onload = function() {
 
   // Commentoのスクリプトタグをコメント領域に追加します
   commentoDiv.appendChild(script);
-
-  // 戻るボタンにイベントリスナーを追加します
-  document.getElementById('back-button').addEventListener('click', function() {
-    window.history.back();
-  });
 }
+
+
+// document.getElementById('back-button').addEventListener('click', function() {
+//   window.history.back();
+// });
