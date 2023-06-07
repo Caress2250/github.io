@@ -1,48 +1,41 @@
-const urlParams = new URLSearchParams(window.location.search);
-let id = urlParams.get('id'); // URLパラメータからIDを取得
+// アクションが行われたかどうかを追跡するフラグを追加
+let actionTaken = false;
 
-let apiIndex = "https://2mmx7gzu7i.microcms.io/api/v1/blogs"; // APIのエンドポイント
-let apiUrl = `${apiIndex}/${id}`; // URLパラメータのIDを使ってAPIのURLを組み立てる
-
-fetch(apiUrl, {
-  headers: {
-    "X-API-KEY": "PEfp0AHyALckYsrJavaQSj0l1KOg6LhIUOww" // APIキー
-  }
-})
-.then(res => res.json())
-.then(json => {
-  // 取得したデータを使って必要な処理を行う
-  document.getElementById('date0').innerHTML = moment(json.publishedAt).format('YYYY年MM月DD日');
-  document.getElementById('title0').innerHTML = json.title;
-  document.getElementById('content0').innerHTML = json.content;
-  document.getElementById('eyecatch0').src = json.eyecatch.url; // アイキャッチ画像を表示
-})
-.catch(err => {
-    console.error('APIリクエストでエラーが発生しました：', err);
-  });
-
-
-
-  
-  // コメント機能を実装する
 window.onload = function() {
-  // コメント領域を初期化します
   let commentoDiv = document.getElementById('commento');
   commentoDiv.innerHTML = '';
 
-  // Commentoのスクリプトタグを作成します
   let script = document.createElement('script');
   script.src = 'https://cdn.commento.io/js/commento.js';
   script.defer = true;
-
-  // 記事ごとに一意の識別子を持つようにdata-page-idを設定します
-  script.dataset.pageId = id;  // idはURLパラメータから取得しています
-
-  // Commentoのスクリプトタグをコメント領域に追加します
+  script.dataset.pageId = id;
   commentoDiv.appendChild(script);
+
+  // コメントが投稿されたときにアクションフラグを更新するイベントリスナーを追加（例として）
+  commentoDiv.addEventListener('commentPosted', function() {
+    actionTaken = true;
+    updateBackButton();
+  });
+
+  // ログインが行われたときにアクションフラグを更新するイベントリスナーを追加（例として）
+  document.getElementById('login-button').addEventListener('click', function() {
+    actionTaken = true;
+    updateBackButton();
+  });
 }
 
+function updateBackButton() {
+  // アクションが行われている場合は「一覧に戻る」ボタンの挙動を更新
+  if (actionTaken) {
+    document.getElementById('back-button').removeEventListener('click', goBack);
+    document.getElementById('back-button').addEventListener('click', function() {
+      window.location.href = "/blog-list-page-url";  // ここにブログ一覧ページのURLを指定
+    });
+  }
+}
 
-// document.getElementById('back-button').addEventListener('click', function() {
-//   window.history.back();
-// });
+function goBack() {
+  window.history.back();
+}
+
+document.getElementById('back-button').addEventListener('click', goBack);
