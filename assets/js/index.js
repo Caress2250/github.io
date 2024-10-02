@@ -76,8 +76,8 @@ const fetchSingleBlogData = (latestId, index) => {
     imgElement.setAttribute("loading", "lazy"); // 遅延読み込み属性を追加
     
     // 画像のサイズを指定
-    imgElement.style.width = '800px';  // 幅を300pxに設定
-    imgElement.style.height = '600px'; // 高さを200pxに設定
+    imgElement.style.width = '300px';  // 幅を300pxに設定
+    imgElement.style.height = '200px'; // 高さを200pxに設定
 
     // Add URL parameter to "Read more" button
     document.getElementById(`button${index}`).href = `page.html?id=${latestId}`;
@@ -95,6 +95,15 @@ const fetchSingleBlogData = (latestId, index) => {
 
     // 最後の段落の余白を削除
     const paragraphs = contentElement.getElementsByTagName('p');
+    if (paragraphs.length > 5) {
+      // 5行目以降の段落を削除
+      for (let j = paragraphs.length - 1; j >= 5; j--) {
+        paragraphs[j].remove();
+      }
+      // 5行目の末尾に "..." を追加
+      paragraphs[4].innerHTML += '...';
+    }
+
     if (paragraphs.length > 0) {
       paragraphs[paragraphs.length - 1].style.marginBottom = '0';
     }
