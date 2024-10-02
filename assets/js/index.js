@@ -76,8 +76,8 @@ const fetchSingleBlogData = (latestId, index) => {
     imgElement.setAttribute("loading", "lazy"); // 遅延読み込み属性を追加
     
     // 画像のサイズを指定
-    imgElement.style.width = '1200px';  // 幅をpxに設定
-    imgElement.style.height = '900px'; // 高さをpxに設定
+    imgElement.style.width = '300px';  // 幅を300pxに設定
+    imgElement.style.height = '200px'; // 高さを200pxに設定
 
     // Add URL parameter to "Read more" button
     document.getElementById(`button${index}`).href = `page.html?id=${latestId}`;
@@ -86,6 +86,9 @@ const fetchSingleBlogData = (latestId, index) => {
     const contentElement = document.getElementById(`content${index}`);
     contentElement.style.marginBottom = '0'; // 余白を削除
     contentElement.style.paddingBottom = '0'; // パディングも削除
+
+    // コンテンツ内の文字サイズを120%に設定
+    contentElement.style.fontSize = '120%'; // 文字サイズを120%に設定
 
     // コンテンツ内の末尾のスペース文字を削除
     contentElement.innerHTML = contentElement.innerHTML.trim();
