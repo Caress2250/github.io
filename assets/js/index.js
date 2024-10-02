@@ -80,5 +80,16 @@ const fetchSingleBlogData = (latestId, index) => {
   })
 }
 
+// 2024.10/03 動的にCSSを追加して余白を削除
+const contentElement = document.getElementById(`content${index}`);
+contentElement.style.marginBottom = '0'; // 余白を削除
+contentElement.style.paddingBottom = '0'; // パディングも削除
+
+// 2024.10.03 最後の段落の余白を削除
+const paragraphs = contentElement.getElementsByTagName('p');
+if (paragraphs.length > 0) {
+  paragraphs[paragraphs.length - 1].style.marginBottom = '0';
+}
+
 // APIから指定されたページのブログ記事を取得します
 getBlogData();
