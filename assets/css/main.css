@@ -2956,9 +2956,9 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			.post {
-				padding: 0em 0em 0.1em 0em ;
+				padding: 1.5em 1.5em 0.1em 1.5em ;
 				left: -1.5em;
-				margin: 0 0 0em 0;
+				margin: 0 0 2em 0;
 				width: calc(100% + (1.5em * 2));
 			}
 
