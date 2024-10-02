@@ -76,8 +76,8 @@ const fetchSingleBlogData = (latestId, index) => {
     imgElement.setAttribute("loading", "lazy"); // 遅延読み込み属性を追加
     
     // 画像のサイズを指定
-    imgElement.style.width = '1500px';  // 幅をpxに設定
-    imgElement.style.height = '1000px'; // 高さをpxに設定
+    imgElement.style.width = '1200px';  // 幅をpxに設定
+    imgElement.style.height = '800px'; // 高さをpxに設定
 
     // Add URL parameter to "Read more" button
     document.getElementById(`button${index}`).href = `page.html?id=${latestId}`;
