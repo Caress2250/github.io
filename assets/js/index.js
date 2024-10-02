@@ -83,6 +83,9 @@ const fetchSingleBlogData = (latestId, index) => {
     contentElement.style.marginBottom = '0'; // 余白を削除
     contentElement.style.paddingBottom = '0'; // パディングも削除
 
+    // コンテンツ内の末尾のスペース文字を削除
+    contentElement.innerHTML = contentElement.innerHTML.trim();
+
     // 最後の段落の余白を削除
     const paragraphs = contentElement.getElementsByTagName('p');
     if (paragraphs.length > 0) {
