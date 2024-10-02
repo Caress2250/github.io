@@ -3608,6 +3608,23 @@ input, select, textarea {
 			visibility: visible;
 		}
 
+
+
+
+
+#content0, #content1, #content2, #content3, #content4 {
+  margin-bottom: 0; /* 不要な余白を削除 */
+  padding-bottom: 0; /* パディングも削除 */
+}
+
+/* 最後の要素のマージンをリセット */
+#content0 p:last-child, 
+#content1 p:last-child, 
+#content2 p:last-child, 
+#content3 p:last-child, 
+#content4 p:last-child {
+  margin-bottom: 0;
+}
 		@media screen and (max-width: 736px) {
 
 			#menu > * {
